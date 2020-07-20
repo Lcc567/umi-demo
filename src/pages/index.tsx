@@ -2,6 +2,7 @@ import { Layout, Menu, Modal, Breadcrumb } from 'antd';
 import React from 'react';
 import { useBoolean, useRequest } from 'ahooks';
 import api from './utils/api.js';
+import axios from 'axios';
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -21,15 +22,16 @@ async function getUsername(): Promise<any> {
   let response: any = await api.request({
     url: '/api/menus',
   });
+  // let response =await axios('/api/menus')
   console.log('response', response);
 
-  // return response.data;
+  return response;
 }
 
 const LayoutProps = (props: LayoutProps) => {
   const [collapsed, { toggle }] = useBoolean(false);
   const { data, error, loading } = useRequest(getUsername);
-  const { data: user } = useRequest(getUsername);
+  // const { data: user } = useRequest(getUsername);
   const onCollapse = (collapsed: boolean) => {
     toggle(collapsed);
   };
@@ -66,14 +68,14 @@ const LayoutProps = (props: LayoutProps) => {
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb> */}
-          <Modal
+          {/* <Modal
             title="Basic Modal"
             visible
           >
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>
-          </Modal>
+          </Modal> */}
           <div
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360 }}
